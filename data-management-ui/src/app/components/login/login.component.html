@@ -1,0 +1,47 @@
+<form [formGroup]="loginForm" (ngSubmit)="loginSubmited()"
+class="border p-3 rounded-3">
+    <div class="row g-0">
+        <div class="col-6 offset-4">
+                <span class="fs-3">Login</span>
+            </div>
+        </div>
+    <div class="row">
+        <div class="col mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email"
+            formControlName="email">
+            <div class="form-text text-danger" *ngIf="Email.errors?.['required'] && (Email.dirty || Email.touched)">
+                Email is required
+            </div>
+            <div class="form-text text-danger" *ngIf="Email.errors?.['email'] && (Email.dirty || Email.touched)">
+                Email is invalid
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col mb-3">
+            <label for="pwd" class="form-label">Password</label>
+            <input type="password" class="form-control" id="pwd"
+            formControlName="password">
+            <div class="form-text text-danger" *ngIf="PWD.errors?.['required'] && (PWD.dirty || PWD.touched)">
+                 Password is required
+            </div>
+            <div class="form-text text-danger" *ngIf="PWD.errors?.['minLength'] && PWD.errors?.['maxLength'] && (PWD.dirty || PWD.touched)">
+                Password is minLength 4 maxLength 12
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="d-grid">
+                <button (click)="alertWithSuccess()" type="submit" [disabled]="loginForm.invalid" class="btn" 
+                class="btn btn-primary">Login</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col mt-3">
+            <span class="me-2">Don't have Account?</span><a routerLink="/register">Register</a>
+        </div>
+    </div>
+</form>

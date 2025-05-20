@@ -1,0 +1,48 @@
+<h2 class="text-center border p-2 rounded-2 ">DASHBOARD</h2>
+<button class="btn-new" routerLink="/create-data">Create New Record</button>
+<table class="text-center ">
+    <thead>
+        <tr>
+            <th> id </th>
+            <th>title</th>
+            <th>description</th>
+            <th>userId</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let test of taskDetails">
+            <td>{{test.id}}</td>
+            <td>
+                <div *ngIf="test.isEdit">
+                    <input type="text" [(ngModel)]="test.title">
+                </div>
+                <div *ngIf="!test.isEdit">
+                    {{test.title}}
+                </div>
+            </td>
+
+            <td>
+                <div *ngIf="test.isEdit">
+                    <input type="text" [(ngModel)]="test.description">
+                </div>
+                <div *ngIf="!test.isEdit">
+                    {{test.description}}
+                </div>
+                </td>
+            <td>{{test.userId}}</td>
+            <td class="text-center">
+                <div *ngIf="!test.isEdit">
+                 <i class="fa fa-pencil-square-o px-2" aria-hidden="true" (click)="onEdit(test)"></i>
+                <i (click)="alertWithSuccess2()" class="fa fa-trash-o" (click)="deleteModelTask(test.id)" routerLink="/dashboard" aria-hidden="true"></i>
+                </div>
+                <div *ngIf="test.isEdit">
+                    <i (click)="alertWithSuccess()" class="fa fa-cloud px-2" routerLink="/dashboard" (click)="onUpdate(test)" aria-hidden="true"></i>
+                     <i (click)="alertWithSuccess1()" class="fa fa-times-circle" (click)="onCancel(test)" aria-hidden="true"></i>
+                </div>
+                
+
+            </td>
+        </tr>
+    </tbody>
+</table>
